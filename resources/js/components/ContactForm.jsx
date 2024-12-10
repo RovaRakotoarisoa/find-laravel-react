@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import login from '../assets/login.png'
+import './index.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faLock, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
 
 // function ContactForm({ onAdd }) {
 //     const [name, setName] = useState('');
@@ -54,6 +58,7 @@ import React, { useState, useEffect } from 'react';
 
 
 function ContactForm({ contactToEdit, onAdd, onUpdate }) {
+
     const [contact, setContact] = useState({
         name: '',
         email: '',
@@ -118,43 +123,112 @@ function ContactForm({ contactToEdit, onAdd, onUpdate }) {
         }
     };
 
+
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label>Name</label>
-                <input
-                    type="text"
-                    name="name"
-                    value={contact.name}
-                    onChange={handleChange}
-                    required
-                />
-            </div>
-            <div>
-                <label>Email</label>
-                <input
-                    type="email"
-                    name="email"
-                    value={contact.email}
-                    onChange={handleChange}
-                    required
-                />
-            </div>
-            <div>
-                <label>Phone</label>
-                <input
-                    type="text"
-                    name="phone"
-                    value={contact.phone}
-                    onChange={handleChange}
-                    required
-                />
-            </div>
-            <button type="submit">
-                {contactToEdit ? 'Update Contact' : 'Add Contact'}
-            </button>
-        </form>
-    );
+    //     <form onSubmit={handleSubmit}>
+    //         <div>
+    //             <label>Name</label>
+    //             <input
+    //                 type="text"
+    //                 name="name"
+    //                 value={contact.name}
+    //                 onChange={handleChange}
+    //                 required
+    //             />
+    //         </div>
+    //         <div>
+    //             <label>Email</label>
+    //             <input
+    //                 type="email"
+    //                 name="email"
+    //                 value={contact.email}
+    //                 onChange={handleChange}
+    //                 required
+    //             />
+    //         </div>
+    //         <div>
+    //             <label>Phone</label>
+    //             <input
+    //                 type="text"
+    //                 name="phone"
+    //                 value={contact.phone}
+    //                 onChange={handleChange}
+    //                 required
+    //             />
+    //         </div>
+    //         <button type="submit">
+    //             {contactToEdit ? 'Update Contact' : 'Add Contact'}
+    //         </button>
+    //     </form>
+    // );
+
+    <div className="Login">
+    <div className="login-header">
+      <img
+        src={login}
+        alt="Logo login"
+        style={{
+          height: '163px',
+          width: '179px',
+          marginBottom: '29px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          display: 'block',
+        }}
+      />
+    </div>
+
+    <form onSubmit={handleSubmit} className="login-form">
+
+      <label className="lab" htmlFor="username">Nom</label>
+      <div className="input-container">
+        <FontAwesomeIcon icon={faUser} className="input-icon" />
+        <input
+          type="text"
+          name="name"
+          className="log"
+          placeholder="Entrez votre nom"
+          value={contact.name}
+          onChange= {handleChange} 
+          required
+        />
+      </div>
+
+      <label className="lab" htmlFor="password">Mot de passe</label>
+      <div className="input-container">
+        <FontAwesomeIcon icon={faEnvelope} className="input-icon" />
+        <input
+          type="email"
+          name='email'
+          className='log'
+          placeholder="Entrez votre email"
+          value={contact.email}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="input-container">
+        <FontAwesomeIcon icon={faPhone} className="input-icon" />
+        <input
+          type="text"
+          name='phone'
+          className='log'
+          placeholder="Mot de passe"
+          value={contact.phone}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      <div className="submit-container">
+        <button type="submit" className="se">
+           {contactToEdit ? 'Update Contact' : 'Add Contact'}
+        </button>
+      </div>
+    </form>
+  </div>
+);
 }
+
 
 export default ContactForm;
