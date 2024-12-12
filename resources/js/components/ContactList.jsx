@@ -54,7 +54,7 @@ function ContactList({ contacts, onEdit, onDelete }) {
             <h2>Contacts</h2>
             <ul className="flex-col">
                 {contacts.map(contact => (
-                    <li key={contact.id} className="text-blue-500">
+                    <li key={contact.id} className="text-blue-500" style={{color:"#2b3776"}}>
                         {contact.name} - {contact.email} - {contact.phone}
                         <button
                             onClick={() => onEdit(contact)}
