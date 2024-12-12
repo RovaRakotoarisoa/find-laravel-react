@@ -46,6 +46,7 @@ class ContactController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $contact = Contact::findOrFail($id);
         $validated = $request->validate([
             'name' => 'string|max:255',
             'email' => 'email|unique:contacts,email,' . $contact->id,
@@ -61,6 +62,7 @@ class ContactController extends Controller
      */
     public function destroy(string $id)
     {
+        $contact = Contact::findOrFail($id);
         $contact->delete();
         return response()->json(null, 204);
     }

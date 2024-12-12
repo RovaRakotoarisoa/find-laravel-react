@@ -34,7 +34,9 @@ import ContactForm from './components/ContactForm';
 // }
 
 
-function App() {
+// function App() {
+
+
     // return (
     //     <div>
     //         {/*<h1>Hello from React!</h1>*/}
@@ -72,6 +74,64 @@ function App() {
     //     setContacts([...contacts, contact]);
     // };
 
+
+
+
+//     const [contacts, setContacts] = useState([]);
+//     const [contactToEdit, setContactToEdit] = useState(null);
+
+//     useEffect(() => {
+//         fetch('/api/contacts')
+//             .then((response) => response.json())
+//             .then((data) => setContacts(data));
+//     }, []);
+
+//     const handleAddContact = (newContact) => {
+//         setContacts([...contacts, newContact]);
+//     };
+
+//     const handleUpdateContact = (updatedContact) => {
+//         setContacts(
+//             contacts.map((contact) =>
+//                 contact.id === updatedContact.id ? updatedContact : contact
+//             )
+//         );
+//         setContactToEdit(null); // Réinitialiser l'édition après mise à jour
+//     };
+
+//     const handleEditContact = (contact) => {
+//         setContactToEdit(contact); // Charger le contact à éditer dans le formulaire
+//     };
+
+//     return (
+//         <div>
+//             <h1>Contact Manager</h1>
+//             <ContactForm contactToEdit={contactToEdit} onAdd={handleAddContact} onUpdate={handleUpdateContact} />
+//             <ContactList contacts={contacts} onEdit={handleEditContact} />
+//         </div>
+//     );
+// }
+
+// const container = document.getElementById('app'); // Récupération du conteneur
+// const root = createRoot(container); // Initialisation avec createRoot
+// root.render(
+//             <StrictMode>
+//                 <App />
+//             </StrictMode>
+//             ); // Utilisation de render via root
+
+
+
+
+// import React, { useState, useEffect } from 'react';
+// import { createRoot } from 'react-dom/client'; 
+// import { StrictMode } from 'react';
+
+//Appel des composants
+// import ContactList from './components/ContactList';
+// import ContactForm from './components/ContactForm';
+
+function App() {
     const [contacts, setContacts] = useState([]);
     const [contactToEdit, setContactToEdit] = useState(null);
 
@@ -98,19 +158,33 @@ function App() {
         setContactToEdit(contact); // Charger le contact à éditer dans le formulaire
     };
 
+    const handleDeleteContact = (contactId) => {
+        fetch(`/api/contacts/${contactId}`, {
+            method: 'DELETE',
+        })
+            .then(() => {
+                setContacts(contacts.filter(contact => contact.id !== contactId)); // Supprimer du tableau
+            })
+            .catch((error) => console.error('Error deleting contact:', error));
+    };
+
     return (
         <div>
             <h1>Contact Manager</h1>
             <ContactForm contactToEdit={contactToEdit} onAdd={handleAddContact} onUpdate={handleUpdateContact} />
-            <ContactList contacts={contacts} onEdit={handleEditContact} />
+            <ContactList
+                contacts={contacts}
+                onEdit={handleEditContact}
+                onDelete={handleDeleteContact}
+            />
         </div>
     );
 }
 
-const container = document.getElementById('app'); // Récupération du conteneur
-const root = createRoot(container); // Initialisation avec createRoot
+const container = document.getElementById('app'); 
+const root = createRoot(container);
 root.render(
-            <StrictMode>
-                <App />
-            </StrictMode>
-            ); // Utilisation de render via root
+    <StrictMode>
+        <App />
+    </StrictMode>
+);

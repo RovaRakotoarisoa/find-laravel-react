@@ -21,3 +21,14 @@ Route::apiResource('contacts', ContactController::class);
 //     return 'API';
 // });
 
+
+
+Route::delete('/contacts/{id}', function ($id) {
+    $contact = Contact::find($id);
+    if ($contact) {
+        $contact->delete();
+        return response()->json(null, 204);
+    }
+    return response()->json(['message' => 'Contact not found'], 404);
+});
+
